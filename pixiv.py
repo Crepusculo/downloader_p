@@ -8,6 +8,8 @@ import time
 import os
 import requests
 
+SLEEP_TIME = 30 # second
+DOWNLOAD_PAGE = 5
 
 def makedir(path):
     path = path.strip()
@@ -147,11 +149,11 @@ class PIXIV(threading.Thread):
 
 pixiv = PIXIV()
 pixiv.login_main_page()
-for i in range(5):
+for i in range(DOWNLOAD_PAGE):
     pixiv.get_bookmark_pic(i)
-    time.sleep(30)
+    time.sleep(SLEEP_TIME)
 while(pixiv.fail_link):
     pixiv.download_fail_pic()
-    time.sleep(30)
+    time.sleep(SLEEP_TIME)
 
 #<li.*?><a href="(.*?)".*?></a>.*?<a.*?>.*?</a></li>
